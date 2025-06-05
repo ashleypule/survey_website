@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Surveys</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-green-50 via-blue-100 to-indigo-50 min-h-screen text-gray-800 font-sans">
+  <div class="max-w-4xl mx-auto py-10 px-6 bg-white bg-opacity-90 shadow-xl rounded-xl mt-10">
+    <div class="flex justify-between items-center border-b pb-4 mb-6">
+      <h1 class="text-2xl font-bold">_Surveys</h1>
+      <div class="space-x-4">
+        <a href="/" class="text-blue-500 hover:underline">FILL OUT SURVEY</a>
+        <a href="/results" class="text-gray-700 hover:underline">VIEW SURVEY RESULTS</a>
+      </div>
+    </div>
+
+    <div id="alertBox" class="hidden mb-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+      <strong class="font-bold">⚠️ Error:</strong>
+      <span id="alertMessage" class="block sm:inline">Age must be between 5 and 120.</span>
+    </div>
+
+    <form action="/submit" method="POST" class="space-y-6" id="surveyForm">
+      <div class="flex items-start">
+        <p class="font-semibold text-sm mr-16">Personal Details :</p>
+        <div class="flex-grow pt-1">
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-medium mb-1">Full Names</label>
+                <input name="name" id="name" type="text" required class="border border-[#B4D4F0] rounded px-1 py-0 w-4/12 bg-white focus:outline-none focus:ring-2 focus:ring-[#7FBCE9]" />
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium mb-1">Email</label>
+                <input name="email" id="email" type="email" required class="border border-[#B4D4F0] rounded px-1 py-0 w-4/12 bg-white focus:outline-none focus:ring-2 focus:ring-[#7FBCE9]" />
+            </div>
+            <div class="mb-4">
+              <label for="dob" class="block text-sm font-medium mb-1">Date of Birth</label>
+              <input name="dob" id="dob" type="date" required autocomplete="off" placeholder="YYYY-MM-DD" class="border border-[#B4D4F0] rounded px-1 py-0 w-4/12 bg-white focus:outline-none focus:ring-2 focus:ring-[#7FBCE9]" />
+          </div>
+            <div>
+                <label for="contact" class="block text-sm font-medium mb-1">Contact Number</label>
+                <input name="contact" id="contact" type="text" required class="border border-[#B4D4F0] rounded px-1 py-0 w-4/12 bg-white focus:outline-none focus:ring-2 focus:ring-[#7FBCE9]" />
+            </div>
+        </div>
+    </div>
+
+      <br>
+      <div class="flex items-center space-x-4">
+        <p class="font-semibold text-sm mb-2">What Is Your Favorite Food?</p>
+        <div class="flex space-x-4">
+          <label><input type="checkbox" name="food" value="Pizza" class="mr-1 accent-[#7FBCE9]" /> Pizza</label>
+          <label><input type="checkbox" name="food" value="Pasta" class="mr-1 accent-[#7FBCE9]" /> Pasta</label>
+          <label><input type="checkbox" name="food" value="Pap and Wors" class="mr-1 accent-[#7FBCE9]" /> Pap and Wors</label>
+          <label><input type="checkbox" name="food" value="Other" class="mr-1 accent-[#7FBCE9]" /> Other</label>
+        </div>
+      </div>
+      
+      <div>
+        <div>
+          <p class="font-semibold text-sm mb-2">
+            Please rate your level of agreement on a scale from 1 to 5, with 1 being "strongly agree" and 5 being "strongly disagree."
+          </p>
+        
+          <table class="w-full border border-[#B4D4F0] text-center table-fixed mt-4">
+            <thead class="bg-[#C0C0C0] border border-black">
+              <tr>
+                <th class="border border-black w-1/6"></th>
+                <th class="border border-black text-xs">Strongly Agree</th>
+                <th class="border border-black text-xs">Agree</th>
+                <th class="border border-black text-xs">Neutral</th>
+                <th class="border border-black text-xs">Disagree</th>
+                <th class="border border-black text-xs">Strongly Disagree</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[#B4D4F0]">
+                <td class="text-left text-xs border-r border-[#B4D4F0] p-2">I like to watch movies</td>
+                <td class="border-r border-[#B4D4F0]"><input type="radio" name="watch_movies" value="1" class="accent-[#7FBCE9]" required /></td>
+                <td class="border-r border-[#B4D4F0]"><input type="radio" name="watch_movies" value="2" class="accent-[#7FBCE9]" /></td>
+                <td class="border-r border-[#B4D4F0]"><input type="radio" name="watch_movies" value="3" class="accent-[#7FBCE9]" /></td>
+                <td class="border-r border-[#B4D4F0]"><input type="radio" name="watch_movies" value="4" class="accent-[#7FBCE9]" /></td>
+                <td><input type="radio" name="watch_movies" value="5" class="accent-[#7FBCE9]" /></td>
+              </tr>
+              <tr class="border-b border-[#B4D4F0]">
+                <td class="text-left text-xs border-r border-[#B4D4F0] p-2">I like to listen to radio</td>
+                <td class="border-r border-[#B4D4F0]"><input type="radio" name="listen_radio" value="1" class="accent-[#7FBCE9]" required /></td>
+                <td class="border-r border-[#B4D4F0]"><input type="radio" name="listen_radio" value="2" class="accent-[#7FBCE9]" /></td>
+                <td class="border-r border-[#B4D4F0]"><input type="radio" name="listen_radio" value="3" class="accent-[#7FBCE9]" /></td>
+                <td class="border-r border-[#B4D4F0]"><input type="radio" name="listen_radio" value="4" class="accent-[#7FBCE9]" /></td>
+                <td><input type="radio" name="listen_radio" value="5" class="accent-[#7FBCE9]" /></td>
+              </tr>
+              <tr class="border-b border-[#B4D4F0]">
+                <td class="text-left text-xs border-r border-[#B4D4F0] p-2">I like to eat out</td>
+                <td class="border-r border-[#B4D4F0]"><input type="radio" name="eat_out" value="1" class="accent-[#7FBCE9]" required /></td>
+                <td class="border-r border-[#B4D4F0]"><input type="radio" name="eat_out" value="2" class="accent-[#7FBCE9]" /></td>
+                <td class="border-r border-[#B4D4F0]"><input type="radio" name="eat_out" value="3" class="accent-[#7FBCE9]" /></td>
+                <td class="border-r border-[#B4D4F0]"><input type="radio" name="eat_out" value="4" class="accent-[#7FBCE9]" /></td>
+                <td><input type="radio" name="eat_out" value="5" class="accent-[#7FBCE9]" /></td>
+              </tr>
+              <tr class="border-b border-[#B4D4F0]">
+                <td class="text-left text-xs border-r border-[#B4D4F0] p-2">I like to watch TV</td>
+                <td class="border-r border-[#B4D4F0]"><input type="radio" name="watch_tv" value="1" class="accent-[#7FBCE9]" required /></td>
+                <td class="border-r border-[#B4D4F0]"><input type="radio" name="watch_tv" value="2" class="accent-[#7FBCE9]" /></td>
+                <td class="border-r border-[#B4D4F0]"><input type="radio" name="watch_tv" value="3" class="accent-[#7FBCE9]" /></td>
+                <td class="border-r border-[#B4D4F0]"><input type="radio" name="watch_tv" value="4" class="accent-[#7FBCE9]" /></td>
+                <td><input type="radio" name="watch_tv" value="5" class="accent-[#7FBCE9]" /></td>
+              </tr>
+            </tbody>
+          </table>          
+        </div>
+        
+        <div class="flex justify-center mt-4">
+          <button type="submit" class="bg-[#3498DB] hover:bg-[#2E86C1] text-white font-semibold px-6 py-1 rounded shadow">
+            Submit
+          </button>
+        </div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('surveyForm');
+    const dobInput = document.getElementById('dob');
+    const alertBox = document.getElementById('alertBox');
+    const alertMessage = document.getElementById('alertMessage');
+
+    form.addEventListener('submit', function (e) {
+      const dob = new Date(dobInput.value);
+      const today = new Date();
+      let age = today.getFullYear() - dob.getFullYear();
+      const m = today.getMonth() - dob.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+        age--;
+      }
+
+      if (age < 5 || age > 120) {
+        e.preventDefault();
+        alertMessage.textContent = "⚠️ Age must be between 5 and 120.";
+        alertBox.classList.remove('hidden');
+
+        setTimeout(() => {
+          alertBox.classList.add('hidden');
+        }, 4000);
+      }
+    });
+  </script>
+</body>
+</html>
